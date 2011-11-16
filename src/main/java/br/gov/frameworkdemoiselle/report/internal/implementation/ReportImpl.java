@@ -91,8 +91,8 @@ public class ReportImpl implements Report {
 	public Object getSource() {
 		try {
 			loadReport(path);
-		} catch (JRException e) {
-			throw new DemoiselleException(bundle.getString("exception-load", path));
+		} catch (Exception e) {
+			throw new DemoiselleException(bundle.getString("exception-load", path),e);
 		}
 		return jasper;
 	}
@@ -103,7 +103,7 @@ public class ReportImpl implements Report {
 	}
 	
 
-	private final void loadReport(String path) throws JRException {
+	private final void loadReport(String path) {
 		if (jasper == null) {
 			String realPath = getRealPath(path);
 			if (path != null && path.endsWith(JasperReportsExporter.NON_COMPILED_REPORT_EXTENSION)) {
@@ -118,16 +118,33 @@ public class ReportImpl implements Report {
 
 				if (urlPossibleJasper != null) {
 					logger.debug(bundle.getString("found-compiled-version", realPath));
-					jasper = (JasperReport) JRLoader.loadObject(urlPossibleJasper.getFile());
+					loadJasperFile(urlPossibleJasper.toString());
 				} else {
 					logger.debug(bundle.getString("not-found-compiled-version"));
-					jasper = JasperCompileManager.compileReport(realPath);
+					compileJRXML(realPath);
 				}
 			} else if (path != null && path.endsWith(JasperReportsExporter.COMPILED_REPORT_EXTENSION)) {
-				jasper = (JasperReport) JRLoader.loadObject(realPath);
+				loadJasperFile(realPath);
 			} else {
 				throw new DemoiselleException(bundle.getString("exception-extension-not-valid", realPath));
 			}
+		}
+	}
+
+	private void compileJRXML(String path) {
+		try {
+			jasper = JasperCompileManager.compileReport(path);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			throw new DemoiselleException(bundle.getString("exception-compiling-jrxml-file", path));			
+		}
+	}
+	
+	private void loadJasperFile(String path) {
+		try {
+			jasper = (JasperReport) JRLoader.loadObject(path);
+		} catch (JRException e) {
+			throw new DemoiselleException(bundle.getString("exception-loading-jasper-file", path),e);
 		}
 	}
 
@@ -142,12 +159,14 @@ public class ReportImpl implements Report {
 	@Override
 	public void prepare(Collection<?> dataSource, Map<String, Object> param) {
 		logger.debug(bundle.getString("filling-report"));
+		loadReport(path);		
+		
 		try {
-			loadReport(path);
 			print = JasperFillManager.fillReport(jasper, param, new JRBeanCollectionDataSource(dataSource));
 		} catch (JRException e) {
-			e.printStackTrace();
-		}		
+			throw new DemoiselleException(bundle.getString("filling-report-problem"), e);
+		}
+		
 	}
 
 	/**

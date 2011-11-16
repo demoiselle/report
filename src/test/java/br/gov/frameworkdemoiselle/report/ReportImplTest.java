@@ -64,7 +64,7 @@ public class ReportImplTest {
 		try {
 			report.getSource();
 			Assert.fail("Deveria levantar exceção.");
-		} catch (DemoiselleException e) {
+		} catch (Throwable e) {
 			
 		} 
 	}
