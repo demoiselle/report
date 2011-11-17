@@ -1,0 +1,148 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>demoiselle-report</artifactId>
+	<version>2.0.2-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<parent>
+		<groupId>br.gov.frameworkdemoiselle.component</groupId>
+		<artifactId>demoiselle-component-parent</artifactId>
+		<version>2.0.7</version>
+		<relativePath>../</relativePath>
+	</parent>
+
+	<name>demoiselle-report</name>
+	<url>http://demoiselle.sourceforge.net/component/${project.artifactId}/${project.version}</url>
+	<description>Geração de relatórios</description>
+
+	<properties>
+		<!-- Propriedade utilizada para categorizar o componente no portal (http://demoiselle.sourceforge.net/component/) -->
+		<category>Visão</category>
+
+	</properties>
+
+	<!-- Dependências do projeto As versões das dependências estão declaradas no parent (demoiselle-component-parent) Quando 
+		necessário o uso de uma biblioteca nova ou um versão mais atual, deve-se abrir uma demanda(http://tracker.frameworkdemoiselle.gov.br) 
+		para adicionar esta dependência no parent dos componentes. Esta ação serve para minimizar os problemas de conflitos de versões 
+		de uma mesma biblioteca em mais de um component( versões distintas). -->
+	<dependencies>
+
+		<dependency>
+			<groupId>br.gov.frameworkdemoiselle</groupId>
+			<artifactId>demoiselle-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-beanutils</artifactId>
+					<groupId>commons-beanutils</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>commons-collections</artifactId>
+					<groupId>commons-collections</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>xml-apis</artifactId>
+					<groupId>xml-apis</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>slf4j-api</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>br.gov.frameworkdemoiselle.component</groupId>
+			<artifactId>demoiselle-junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-module-junit4</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-api-easymock</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.easymock</groupId>
+			<artifactId>easymock</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<!-- Este plugin serve para o envio dos arquivos de configuração do portal de componentes. Os arquivos da pasta src/site/portal 
+				serão enviados para a raiz do site de componentes informando a categoria do projeto e a descrição além de um arquivo index.php 
+				que redireciona para a ultima versão do componente. -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>wagon-maven-plugin</artifactId>
+				<version>${wagon-maven-plugin}</version>
+				<executions>
+					<execution>
+						<id>upload-portal-info</id>
+						<phase>site-deploy</phase>
+						<goals>
+							<goal>upload</goal>
+						</goals>
+						<configuration>
+							<serverId>demoiselle.sourceforge.net</serverId>
+							<fromDir>${basedir}/target/site/portal</fromDir>
+							<url>${site.shell.url}/${project.artifactId}</url>
+							<toDir />
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<!-- Conexão com o repositório de fontes -->
+	<scm>
+		<connection>scm:svn:http://demoiselle.svn.sourceforge.net/svnroot/demoiselle/component/trunk/demoiselle-report</connection>
+		<developerConnection>scm:svn:https://demoiselle.svn.sourceforge.net/svnroot/demoiselle/component/trunk/demoiselle-report</developerConnection>
+		<url>scm:svn:http://demoiselle.svn.sourceforge.net/viewvc/demoiselle/component/trunk/demoiselle-report</url>
+	</scm>
+
+	<!-- Distribuição do projeto -->
+	<distributionManagement>
+		<site>
+			<id>demoiselle.sourceforge.net</id>
+			<!-- O padrão para garantir o histório de sites é <nome do componente>/<versao> -->
+			<url>${site.shell.url}/${project.artifactId}/${project.version}</url>
+		</site>
+	</distributionManagement>
+
+	<repositories>
+		<repository>
+			<id>demoiselle.sourceforge.net</id>
+			<url>http://demoiselle.sourceforge.net/repository/release</url>
+		</repository>
+	</repositories>
+
+</project>
