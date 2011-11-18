@@ -17,7 +17,7 @@ Seu objetivo é diminuir a complexidade para: leitura, geração e exibição de
 ## Repositório Maven
 
     <repository>
-  		<id>demoiselle.sourceforge.net-release</id>
+  		<id>demoiselle.sourceforge.net</id>
 		<url>http://demoiselle.sourceforge.net/repository/release</url>
 	</repository>
 
