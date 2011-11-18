@@ -20,7 +20,7 @@
 	<properties>
 		<!-- Propriedade utilizada para categorizar o componente no portal (http://demoiselle.sourceforge.net/component/) -->
 		<category>Visão</category>
-
+		<github.scm>scm:git:git@github.com:demoiselle/report.git</github.scm>
 	</properties>
 
 	<!-- Dependências do projeto As versões das dependências estão declaradas no parent (demoiselle-component-parent) Quando 
@@ -124,9 +124,9 @@
 
 	<!-- Conexão com o repositório de fontes -->
 	<scm>
-		<connection>scm:svn:http://demoiselle.svn.sourceforge.net/svnroot/demoiselle/component/trunk/demoiselle-report</connection>
-		<developerConnection>scm:svn:https://demoiselle.svn.sourceforge.net/svnroot/demoiselle/component/trunk/demoiselle-report</developerConnection>
-		<url>scm:svn:http://demoiselle.svn.sourceforge.net/viewvc/demoiselle/component/trunk/demoiselle-report</url>
+		<connection>${github.scm}</connection>
+		<developerConnection>${github.scm}</developerConnection>
+		<url>${github.scm}</url>
 	</scm>
 
 	<!-- Distribuição do projeto -->
