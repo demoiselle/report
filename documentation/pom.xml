@@ -14,7 +14,7 @@
  GNU General Public License for more details.
  
  You should have received a copy of the GNU Lesser General Public License version 3
- along with this prohttp://demoiselle.sf.net/docsgram; if not,  see <http://www.gnu.org/licenses />
+ along with this program; if not,  see <http://www.gnu.org/licenses />
  or write to the Free Software Foundation, Inc., 51 Franklin Street,
  Fifth Floor, Boston, MA  02110-1301, USA.
  ============================================================================
@@ -34,38 +34,32 @@
  ou escreva para a Fundação do Software Livre (FSF) Inc.,
  51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>br.gov.frameworkdemoiselle.component</groupId>
-	<artifactId>demoiselle-report-build</artifactId>
+	<artifactId>demoiselle-report-documentation-build</artifactId>
 	<version>2.2.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<parent>
-		<groupId>br.gov.frameworkdemoiselle</groupId>
-		<artifactId>demoiselle-component-build-parent</artifactId>
-		<version>1-SNAPSHOT</version>
-		<relativePath>../internal/parent/build/component/pom.xml</relativePath>
-	</parent>
-
-	<name>Build Aggregator</name>
-	<description>
-		A liberação de versões deste componente deve ser feita a partir deste build, que fará automaticamente o build
-		de todos os artefatos com versionamento sincronizado. Jamais gere uma versão deste componente sem utilizar este build.
-	</description>
+	<name>Documentation Build Aggregator</name>
+	<description />
 
 	<modules>
-		<module>impl</module>
-		<module>documentation</module>
+		<module>reference</module>
 	</modules>
 
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>wagon-maven-plugin</artifactId>
+				<configuration>
+					<url>.</url>
+					<skip>true</skip>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -78,24 +72,17 @@
 	</build>
 
 	<distributionManagement>
+		<repository>
+			<id />
+			<url />
+		</repository>
+		<snapshotRepository>
+			<id />
+			<url />
+		</snapshotRepository>
 		<site>
-			<id>demoiselle.sourceforge.net</id>
-			<url>${site.url}</url>
+			<id />
+			<url>file://${project.build.directory}/tmp</url>
 		</site>
 	</distributionManagement>
-
-	<repositories>
-		<repository>
-			<id>demoiselle.sourceforge.net</id>
-			<name>Demoiselle Maven Repository</name>
-			<url>http://demoiselle.sourceforge.net/repository/release</url>
-		</repository>
-	</repositories>
-
-	<properties>
-		<project.alias>report</project.alias>
-		<category>Visão</category>
-		<project.nextVersion>2.2.2-SNAPSHOT</project.nextVersion>
-	</properties>
 </project>
-

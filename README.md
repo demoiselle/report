@@ -10,7 +10,7 @@ Seu objetivo é diminuir a complexidade para: leitura, geração e exibição de
 
 * [Portal](http://frameworkdemoiselle.gov.br): Central de acesso as informações do Demoiselle
 * [Documentação](http://demoiselle.sf.net/docs): Aprenda mais!
-* [Fórum]:(http://forum.frameworkdemoiselle.gov.br) Fóruns de discussão
+* [Fórum](http://forum.frameworkdemoiselle.gov.br): Fóruns de discussão
 * [Tracker](http://tracker.frameworkdemoiselle.gov.br): Submissão/acompanhamento de Bugs, Improvements e New Features
 * [Lista de discussão](http://lists.sourceforge.net/lists/listinfo/demoiselle-users): Comunicação e troca de experiências entre os usuários do projeto.
 
