@@ -38,7 +38,7 @@
 <project>
 
 	<bannerLeft>
-		<name>${project.name}</name>
+		<name>Demoiselle Report</name>
 		<src>images/logo-l.png</src>
 		<href>${project.url}</href>
 	</bannerLeft>
@@ -69,7 +69,7 @@
 			<item name="Portal" href="http://www.frameworkdemoiselle.gov.br" />
 		</links>
 
-		<menu name="${project.name}">
+		<menu name="Report">
 			<item name="Sobre" href="index.html" />
 			<item name="Documentação" href="http://demoiselle.sf.net/docs" />
 			<item name="Notas de Versão" href="release-notes.html" />
