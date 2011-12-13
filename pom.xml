@@ -95,7 +95,7 @@
 	<properties>
 		<project.alias>report</project.alias>
 		<category>Visão</category>
-		<project.nextVersion>2.2.2-SNAPSHOT</project.nextVersion>
+		<project.nextVersion>2.0.3-SNAPSHOT</project.nextVersion>
 	</properties>
 </project>
 
