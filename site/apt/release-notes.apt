@@ -38,6 +38,11 @@
 
 Notas de Versão
 
+* {{{../2.0.2}v2.0.2}}
+
+  * {{{http://sourceforge.net/apps/mantisbt/demoiselle/view.php?id=731}0000731}}: Adicionar todos os tipos de relatórios do jasper como o ODS
+
+
 * {{{../2.0.1}v2.0.1}}
 
   * {{{http://sourceforge.net/apps/mantisbt/demoiselle/view.php?id=710}0000710}}: Report estender Serializable

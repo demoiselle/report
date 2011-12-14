@@ -53,10 +53,6 @@
 	<name>Report Component</name>
 	<description />
 
-	<properties>
-		<category>Visão</category>
-	</properties>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -66,17 +62,11 @@
 		</plugins>
 	</build>
 
-	<!-- Dependências do projeto As versões das dependências estão declaradas no parent (demoiselle-component-parent) Quando 
-		necessário o uso de uma biblioteca nova ou um versão mais atual, deve-se abrir uma demanda(http://tracker.frameworkdemoiselle.gov.br) 
-		para adicionar esta dependência no parent dos componentes. Esta ação serve para minimizar os problemas de conflitos de versões 
-		de uma mesma biblioteca em mais de um component( versões distintas). -->
 	<dependencies>
-
 		<dependency>
 			<groupId>br.gov.frameworkdemoiselle</groupId>
 			<artifactId>demoiselle-core</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
@@ -99,7 +89,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
@@ -110,31 +99,32 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
 		<dependency>
 			<groupId>br.gov.frameworkdemoiselle.component</groupId>
 			<artifactId>demoiselle-junit</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.powermock</groupId>
 			<artifactId>powermock-module-junit4</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.powermock</groupId>
 			<artifactId>powermock-api-easymock</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.easymock</groupId>
 			<artifactId>easymock</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
 
+	<repositories>
+		<repository>
+			<id>demoiselle.sourceforge.net</id>
+			<url>http://demoiselle.sourceforge.net/repository/release</url>
+		</repository>
+	</repositories>
 </project>
