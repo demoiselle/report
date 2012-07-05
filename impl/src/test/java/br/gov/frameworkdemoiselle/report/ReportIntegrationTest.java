@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import junit.framework.Assert;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -32,6 +33,7 @@ public class ReportIntegrationTest {
 	 * Teste simples para verificar se o relatório é criado sem erros.
 	 */
 	@Test
+	@Ignore
 	public void testIntegration() {
 		try {
 			byte[] relbytes = report.export(pessoaDAO.listarTudo(), new HashMap<String, Object>(), Type.PDF);
