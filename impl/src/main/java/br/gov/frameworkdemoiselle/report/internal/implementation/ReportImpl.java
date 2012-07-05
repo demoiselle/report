@@ -36,7 +36,7 @@
  */
 package br.gov.frameworkdemoiselle.report.internal.implementation;
 
-import java.net.URL;
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.Map;
 
@@ -86,13 +86,13 @@ public class ReportImpl implements Report {
 		this.bundle = new ResourceBundleProducer().create("demoiselle-report-bundle");
 		this.path = path;
 	}
-	
+
 	@Override
 	public Object getSource() {
 		try {
-			loadReport(path);
+			loadReport();
 		} catch (Exception e) {
-			throw new DemoiselleException(bundle.getString("exception-load", path),e);
+			throw new DemoiselleException(bundle.getString("exception-load", path), e);
 		}
 		return jasper;
 	}
@@ -101,77 +101,68 @@ public class ReportImpl implements Report {
 	public Object getReportObject() {
 		return print;
 	}
-	
 
-	private final void loadReport(String path) {
-		if (jasper == null) {
-			String realPath = getRealPath(path);
-			if (path != null && path.endsWith(JasperReportsExporter.NON_COMPILED_REPORT_EXTENSION)) {
-				logger.warn(bundle.getString("recommend-use-jasper"));
-
-				URL urlPossibleJasper = this
-						.getClass()
-						.getClassLoader()
-						.getResource(
-								path.replaceAll(JasperReportsExporter.NON_COMPILED_REPORT_EXTENSION,
-										JasperReportsExporter.COMPILED_REPORT_EXTENSION));
-
-				if (urlPossibleJasper != null) {
-					logger.debug(bundle.getString("found-compiled-version", realPath));
-					loadJasperFile(urlPossibleJasper.toString());
-				} else {
-					logger.debug(bundle.getString("not-found-compiled-version"));
-					compileJRXML(realPath);
-				}
-			} else if (path != null && path.endsWith(JasperReportsExporter.COMPILED_REPORT_EXTENSION)) {
-				loadJasperFile(realPath);
-			} else {
-				throw new DemoiselleException(bundle.getString("exception-extension-not-valid", realPath));
-			}
-		}
+	private InputStream getReportStream(String relativePath) {
+		InputStream reportStream = this.getClass().getClassLoader().getResourceAsStream(relativePath);
+		if (reportStream == null)
+			throw new DemoiselleException(bundle.getString("file-not-found"));
+		return reportStream;
 	}
 
-	private void compileJRXML(String path) {
+	private void loadJRXML(String relativePath) {
 		try {
-			jasper = JasperCompileManager.compileReport(path);
+			jasper = JasperCompileManager.compileReport(getReportStream(relativePath));
 		} catch (Throwable e) {
 			e.printStackTrace();
-			throw new DemoiselleException(bundle.getString("exception-compiling-jrxml-file", path));			
-		}
-	}
-	
-	private void loadJasperFile(String path) {
-		try {
-			jasper = (JasperReport) JRLoader.loadObject(path);
-		} catch (JRException e) {
-			throw new DemoiselleException(bundle.getString("exception-loading-jasper-file", path),e);
+			throw new DemoiselleException(bundle.getString("exception-compiling-jrxml-file", path));
 		}
 	}
 
-	private final String getRealPath(String relativePath) {
-		URL url = this.getClass().getClassLoader().getResource(relativePath);
-		if (url == null) {
-			throw new DemoiselleException(bundle.getString("file-not-found"));
+	private void loadJasper(String relativePath) {
+		try {
+			jasper = (JasperReport) JRLoader.loadObject(getReportStream(relativePath));
+		} catch (JRException e) {
+			throw new DemoiselleException(bundle.getString("exception-loading-jasper-file", path), e);
 		}
-		return url.getFile();
+	}
+
+	private final void loadReport() {
+		if (path == null)
+			throw new DemoiselleException(bundle.getString("file-not-found"));
+		if (jasper == null)
+			if (path.endsWith(JasperReportsExporter.COMPILED_REPORT_EXTENSION)) {
+				loadJasper(path);
+			} else if (path.endsWith(JasperReportsExporter.NON_COMPILED_REPORT_EXTENSION)) {
+				logger.warn(bundle.getString("recommend-use-jasper"));
+				String jasperPath = path.replaceAll(JasperReportsExporter.NON_COMPILED_REPORT_EXTENSION,
+						JasperReportsExporter.COMPILED_REPORT_EXTENSION);
+				try {
+					loadJasper(jasperPath);
+					logger.debug(bundle.getString("found-compiled-version", jasperPath));
+				} catch (Exception e) {
+					logger.debug(bundle.getString("not-found-compiled-version"));
+					loadJRXML(jasperPath);
+				}
+			} else
+				throw new DemoiselleException(bundle.getString("exception-extension-not-valid", path));
 	}
 
 	@Override
 	public void prepare(Collection<?> dataSource, Map<String, Object> param) {
 		logger.debug(bundle.getString("filling-report"));
-		loadReport(path);		
-		
+		loadReport();
+
 		try {
 			print = JasperFillManager.fillReport(jasper, param, new JRBeanCollectionDataSource(dataSource));
 		} catch (JRException e) {
 			throw new DemoiselleException(bundle.getString("filling-report-problem"), e);
 		}
-		
+
 	}
 
 	/**
-	 * Inform if the method fill was already invoked, so its no need to rebuild the
-	 * report, you can export it many times and types you want.
+	 * Inform if the method fill was already invoked, so its no need to rebuild
+	 * the report, you can export it many times and types you want.
 	 * 
 	 * @return
 	 */
@@ -181,14 +172,15 @@ public class ReportImpl implements Report {
 
 	/**
 	 * 
-	 * Fill the report then generate de output for the report usind the filled data.
+	 * Fill the report then generate de output for the report usind the filled
+	 * data.
 	 * 
 	 * Before call this method, is necessary to call the fill method.
 	 * 
 	 * @return
-	 * @throws JRException 
+	 * @throws JRException
 	 */
-	public byte[] export(Collection<?> dataSource, Map<String, Object> param, Type type){
+	public byte[] export(Collection<?> dataSource, Map<String, Object> param, Type type) {
 		prepare(dataSource, param);
 		return export(type);
 
@@ -200,9 +192,9 @@ public class ReportImpl implements Report {
 	 * Before call this method, is necessary to call the fill method.
 	 * 
 	 * @return
-	 * @throws JRException 
+	 * @throws JRException
 	 */
-	public byte[] export(Type type){
+	public byte[] export(Type type) {
 		if (!isFilled()) {
 			throw new DemoiselleException(bundle.getString("exception-report-not-filled"));
 		}
