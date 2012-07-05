@@ -28,4 +28,4 @@
                                     
 Sobre Report
   
-  O componente de Demoiselle Report provêr facilidades para integração das aplicações ao uso de componentes para geração de relatório. Seu objetivo é diminuir a complexidade para: leitura, geração e exibição de relatórios.
+  O componente Demoiselle Report provê facilidades para integração das aplicações ao uso de componentes para geração de relatório. Seu objetivo é diminuir a complexidade para: leitura, geração e exibição de relatórios.
