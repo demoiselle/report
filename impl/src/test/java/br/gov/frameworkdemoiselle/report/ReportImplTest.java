@@ -27,6 +27,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.reflect.Whitebox;
 import org.slf4j.Logger;
 
+import br.gov.frameworkdemoiselle.internal.producer.LoggerProducer;
 import br.gov.frameworkdemoiselle.report.internal.implementation.JasperReportsExporter;
 import br.gov.frameworkdemoiselle.report.internal.implementation.ReportImpl;
 import br.gov.frameworkdemoiselle.report.mock.model.Pessoa;
@@ -56,8 +57,8 @@ public class ReportImplTest {
 	 */
 	@Test
 	public void testReportWithWrongExtension() {
-		PowerMock.mockStatic(Beans.class);
-		EasyMock.expect(Beans.getReference(Logger.class)).andReturn(logger);
+		PowerMock.mockStatic(LoggerProducer.class);
+		EasyMock.expect(LoggerProducer.create(Logger.class)).andReturn(logger);
 		PowerMock.replayAll();
 
 		report = new ReportImpl("readme.txt");

@@ -75,8 +75,7 @@ public class JasperReportsExporter {
 		if (logger == null) {
 			logger = LoggerProducer.create(Logger.class);
 		}
-		ResourceBundleProducer bundleProducer = new ResourceBundleProducer();
-		ResourceBundle bundle = bundleProducer.create("demoiselle-report-bundle");
+		ResourceBundle bundle = ResourceBundleProducer.create("demoiselle-report-bundle");
 
 		logger.debug(bundle.getString("generating-report", type.name()));
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

@@ -55,8 +55,8 @@ public enum Type {
 	 * @return Type
 	 */
 	public static Type valueTo(String alias) {
-		ResourceBundleProducer bundleProducer = new ResourceBundleProducer();
-		ResourceBundle bundle = bundleProducer.create("demoiselle-report-bundle");
+		//ResourceBundleProducer bundleProducer = new ResourceBundleProducer();
+		ResourceBundle bundle = ResourceBundleProducer.create("demoiselle-report-bundle");
 
 		if (alias == null || alias == "") {
 			throw new DemoiselleException(bundle.getString("report-type-null"));

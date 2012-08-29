@@ -40,8 +40,6 @@ import java.io.InputStream;
 import java.util.Collection;
 import java.util.Map;
 
-import javax.enterprise.context.SessionScoped;
-
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -53,13 +51,12 @@ import net.sf.jasperreports.engine.util.JRLoader;
 import org.slf4j.Logger;
 
 import br.gov.frameworkdemoiselle.DemoiselleException;
+import br.gov.frameworkdemoiselle.internal.producer.LoggerProducer;
 import br.gov.frameworkdemoiselle.internal.producer.ResourceBundleProducer;
 import br.gov.frameworkdemoiselle.report.Report;
 import br.gov.frameworkdemoiselle.report.Type;
-import br.gov.frameworkdemoiselle.util.Beans;
 import br.gov.frameworkdemoiselle.util.ResourceBundle;
 
-@SessionScoped
 public class ReportImpl implements Report {
 
 	private static final long serialVersionUID = -2678172269775864650L;
@@ -73,7 +70,7 @@ public class ReportImpl implements Report {
 	private String path;
 
 	private ResourceBundle bundle;
-
+	
 	/**
 	 * It will load the report by the informed path.
 	 * 
@@ -82,8 +79,8 @@ public class ReportImpl implements Report {
 	 * @throws JRException
 	 */
 	public ReportImpl(String path) {
-		this.logger = Beans.getReference(Logger.class);
-		this.bundle = new ResourceBundleProducer().create("demoiselle-report-bundle");
+		this.logger = LoggerProducer.create(Logger.class);
+		this.bundle = ResourceBundleProducer.create("demoiselle-report-bundle");
 		this.path = path;
 	}
 

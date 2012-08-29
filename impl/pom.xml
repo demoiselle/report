@@ -46,7 +46,7 @@
 	<parent>
 		<groupId>br.gov.frameworkdemoiselle</groupId>
 		<artifactId>demoiselle-parent</artifactId>
-		<version>1</version>
+		<version>6-SNAPSHOT</version>
 		<relativePath>../../internal/parent/demoiselle/pom.xml</relativePath>
 	</parent>
 
@@ -66,7 +66,7 @@
 		<dependency>
 			<groupId>br.gov.frameworkdemoiselle</groupId>
 			<artifactId>demoiselle-core</artifactId>
-		</dependency>
+			</dependency>
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
@@ -104,7 +104,7 @@
 			<groupId>br.gov.frameworkdemoiselle.component</groupId>
 			<artifactId>demoiselle-junit</artifactId>
 			<scope>test</scope>
-		</dependency>
+			</dependency>
 		<dependency>
 			<groupId>org.powermock</groupId>
 			<artifactId>powermock-module-junit4</artifactId>

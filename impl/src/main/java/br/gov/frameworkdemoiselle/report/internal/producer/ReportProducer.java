@@ -58,6 +58,7 @@ public class ReportProducer {
 		if (field.isAnnotationPresent(Path.class)) {
 			path = field.getAnnotation(Path.class).value();
 		}
+
 		return create(path);
 	}
 
