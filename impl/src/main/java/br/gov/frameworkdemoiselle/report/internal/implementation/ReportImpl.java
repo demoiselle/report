@@ -102,7 +102,7 @@ public class ReportImpl implements Report {
 	}
 
 	private InputStream getReportStream(String relativePath) {
-		InputStream reportStream = this.getClass().getClassLoader().getResourceAsStream(relativePath);
+		InputStream reportStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(relativePath);//this.getClass().getClassLoader().getResourceAsStream(relativePath);
 
 		if (reportStream == null) {
 			throw new DemoiselleException(bundle.getString("file-not-found"));
