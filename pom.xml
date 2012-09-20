@@ -58,7 +58,7 @@
 
 	<modules>
 		<module>impl</module>
-		<module>documentation</module>
+		<module>documentation/reference</module>
 	</modules>
 
 	<build>
