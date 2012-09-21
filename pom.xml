@@ -45,9 +45,9 @@
 
 	<parent>
 		<groupId>br.gov.frameworkdemoiselle</groupId>
-		<artifactId>demoiselle-component-build-parent</artifactId>
-		<version>1</version>
-		<relativePath>../internal/parent/build/component/pom.xml</relativePath>
+		<artifactId>demoiselle-build-parent</artifactId>
+		<version>2-SNAPSHOT</version>
+		<relativePath>../internal/parent/build/demoiselle</relativePath>
 	</parent>
 
 	<name>Build Aggregator</name>
@@ -92,9 +92,9 @@
 
 	<repositories>
 		<repository>
-			<id>demoiselle.sourceforge.net</id>
-			<name>Demoiselle Maven Repository</name>
-			<url>http://demoiselle.sourceforge.net/repository/release</url>
+			<id>sonatype-nexus-snapshots</id>
+			<name>Sonatype Nexus Snapshots</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</repository>
 	</repositories>
 

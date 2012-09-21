@@ -65,7 +65,7 @@
 
 	<organization>
 		<name>SERPRO - Serviço Federal de Processamento de Dados</name>
-		<url>http://www.frameworkdemoiselle.gov.br</url>
+		<url>http://www.serpro.gov.br</url>
 	</organization>
 
 	<build>
@@ -131,6 +131,7 @@
 		<dependency>
 			<groupId>br.gov.frameworkdemoiselle.component</groupId>
 			<artifactId>demoiselle-junit</artifactId>
+			<version>2.3.0-RC1</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
