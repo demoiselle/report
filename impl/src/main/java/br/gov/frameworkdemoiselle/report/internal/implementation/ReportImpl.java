@@ -51,6 +51,7 @@ import net.sf.jasperreports.engine.util.JRLoader;
 import org.slf4j.Logger;
 
 import br.gov.frameworkdemoiselle.DemoiselleException;
+import br.gov.frameworkdemoiselle.internal.configuration.ConfigurationLoader;
 import br.gov.frameworkdemoiselle.internal.producer.LoggerProducer;
 import br.gov.frameworkdemoiselle.internal.producer.ResourceBundleProducer;
 import br.gov.frameworkdemoiselle.report.Report;
@@ -70,7 +71,7 @@ public class ReportImpl implements Report {
 	private String path;
 
 	private ResourceBundle bundle;
-	
+
 	/**
 	 * It will load the report by the informed path.
 	 * 
@@ -88,11 +89,11 @@ public class ReportImpl implements Report {
 	public Object getSource() {
 		try {
 			loadReport();
-			
+
 		} catch (Exception e) {
 			throw new DemoiselleException(bundle.getString("exception-load", path), e);
 		}
-		
+
 		return jasper;
 	}
 
@@ -102,7 +103,15 @@ public class ReportImpl implements Report {
 	}
 
 	private InputStream getReportStream(String relativePath) {
-		InputStream reportStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(relativePath);//this.getClass().getClassLoader().getResourceAsStream(relativePath);
+		InputStream reportStream;
+
+		try {
+			ClassLoader classLoader = ConfigurationLoader.getClassLoaderForResource(relativePath);
+			reportStream = classLoader.getResourceAsStream(relativePath);
+
+		} catch (Exception cause) {
+			reportStream = null;
+		}
 
 		if (reportStream == null) {
 			throw new DemoiselleException(bundle.getString("file-not-found"));
@@ -114,7 +123,7 @@ public class ReportImpl implements Report {
 	private void loadJRXML(String relativePath) {
 		try {
 			jasper = JasperCompileManager.compileReport(getReportStream(relativePath));
-			
+
 		} catch (Throwable e) {
 			e.printStackTrace();
 			throw new DemoiselleException(bundle.getString("exception-compiling-jrxml-file", path));
@@ -124,7 +133,7 @@ public class ReportImpl implements Report {
 	private void loadJasper(String relativePath) {
 		try {
 			jasper = (JasperReport) JRLoader.loadObject(getReportStream(relativePath));
-			
+
 		} catch (JRException e) {
 			throw new DemoiselleException(bundle.getString("exception-loading-jasper-file", path), e);
 		}
@@ -141,15 +150,16 @@ public class ReportImpl implements Report {
 
 			} else if (path.endsWith(JasperReportsExporter.NON_COMPILED_REPORT_EXTENSION)) {
 				logger.warn(bundle.getString("recommend-use-jasper"));
-				String jasperPath = path.replaceAll(JasperReportsExporter.NON_COMPILED_REPORT_EXTENSION,
-						JasperReportsExporter.COMPILED_REPORT_EXTENSION);
 				try {
+					String jasperPath = path.replaceAll(JasperReportsExporter.NON_COMPILED_REPORT_EXTENSION,
+							JasperReportsExporter.COMPILED_REPORT_EXTENSION);
+					
 					loadJasper(jasperPath);
 					logger.debug(bundle.getString("found-compiled-version", jasperPath));
-					
+
 				} catch (Exception e) {
 					logger.debug(bundle.getString("not-found-compiled-version"));
-					loadJRXML(jasperPath);
+					loadJRXML(path);
 				}
 
 			} else {
@@ -204,7 +214,7 @@ public class ReportImpl implements Report {
 		if (!isFilled()) {
 			throw new DemoiselleException(bundle.getString("exception-report-not-filled"));
 		}
-		
+
 		return JasperReportsExporter.export(type, print).toByteArray();
 	}
 
