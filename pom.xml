@@ -45,12 +45,12 @@
 
 	<parent>
 		<groupId>br.gov.frameworkdemoiselle</groupId>
-		<artifactId>demoiselle-build-parent</artifactId>
+		<artifactId>demoiselle-component-build-parent</artifactId>
 		<version>2-SNAPSHOT</version>
-		<relativePath>../internal/parent/build/demoiselle</relativePath>
+		<relativePath>../internal/parent/build/component</relativePath>
 	</parent>
 
-	<name>Build Aggregator</name>
+	<name>Demoiselle Report Component Build Aggregator</name>
 	<description>
 		A liberação de versões deste componente deve ser feita a partir deste build, que fará automaticamente o build
 		de todos os artefatos com versionamento sincronizado. Jamais gere uma versão deste componente sem utilizar este build.
@@ -77,17 +77,10 @@
 		</plugins>
 	</build>
 
-	<distributionManagement>
-		<site>
-			<id>demoiselle.sourceforge.net</id>
-			<url>${site.url}</url>
-		</site>
-	</distributionManagement>
-
 	<scm>
-		<connection>scm:git:git://github.com/demoiselle/${project.alias}.git</connection>
-		<developerConnection>scm:git:git://github.com/demoiselle/${project.alias}.git</developerConnection>
-		<url>scm:git:git://github.com/demoiselle/${project.alias}.git</url>
+		<connection>scm:git:git@github.com:demoiselle/${project.alias}.git</connection>
+		<developerConnection>scm:git:git@github.com:demoiselle/${project.alias}.git</developerConnection>
+		<url>http://github.com/demoiselle/${project.alias}</url>
 	</scm>
 
 	<repositories>
@@ -114,6 +107,13 @@
 			</releases>
 		</repository>
 	</repositories>
+
+	<distributionManagement>
+		<site>
+			<id>demoiselle.sourceforge.net</id>
+			<url>${site.url}</url>
+		</site>
+	</distributionManagement>
 
 	<properties>
 		<project.alias>report</project.alias>

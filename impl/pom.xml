@@ -46,7 +46,7 @@
 	<parent>
 		<groupId>br.gov.frameworkdemoiselle</groupId>
 		<artifactId>demoiselle-parent</artifactId>
-		<version>6</version>
+		<version>7-SNAPSHOT</version>
 		<relativePath>../../internal/parent/demoiselle</relativePath>
 	</parent>
 
@@ -177,7 +177,7 @@
 	</repositories>
 
 	<properties>
-		<demoiselle.framework.version>2.3.0-RC2-SNAPSHOT</demoiselle.framework.version>
+		<demoiselle.framework.version>2.3.0-RC2</demoiselle.framework.version>
 		<jasperreports.version>4.0.1</jasperreports.version>
 	</properties>
 </project>

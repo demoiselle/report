@@ -45,12 +45,14 @@
 	<parent>
 		<groupId>br.gov.frameworkdemoiselle</groupId>
 		<artifactId>demoiselle-documentation-parent</artifactId>
-		<version>3</version>
+		<version>4-SNAPSHOT</version>
 		<relativePath>../../../internal/parent/documentation</relativePath>
 	</parent>
 
-	<name>Reference Documentation</name>
-	<description />
+	<name>Demoiselle Report Component Reference Documentation</name>
+	<description>
+		Demoiselle Report Component Reference Documentation
+	</description>
 
 	<build>
 		<plugins>
