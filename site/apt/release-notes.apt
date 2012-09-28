@@ -38,19 +38,23 @@
 
 Notas de Versão
 
-* v2.0.4
+* v2.0.5
 
-  * {{{http://sourceforge.net/apps/mantisbt/demoiselle/view.php?id=767}0000767}}: Correção do erro ao tentar acessar os relatórios empacotados no WAR da aplicação
+  * {{{http://sourceforge.net/apps/mantisbt/demoiselle/view.php?id=867}0000867}}: [Bug] Correção do erro na geração dos relatórios (Expecting non-static method)
+
+* {{{../2.0.4}v2.0.4}}
+
+  * {{{http://sourceforge.net/apps/mantisbt/demoiselle/view.php?id=767}0000767}}: [Bug] Correção do erro ao tentar acessar os relatórios empacotados no WAR da aplicação
 
 * {{{../2.0.2}v2.0.2}}
 
-  * {{{http://sourceforge.net/apps/mantisbt/demoiselle/view.php?id=731}0000731}}: Adicionar todos os tipos de relatórios do jasper como o ODS
+  * {{{http://sourceforge.net/apps/mantisbt/demoiselle/view.php?id=731}0000731}}: [Improvement] Adicionando todos os tipos de relatórios do jasper como o ODS.
 
 * {{{../2.0.1}v2.0.1}}
 
-  * {{{http://sourceforge.net/apps/mantisbt/demoiselle/view.php?id=710}0000710}}: Report estender Serializable
+  * {{{http://sourceforge.net/apps/mantisbt/demoiselle/view.php?id=710}0000710}}: [Bug] Report implementando serialialização.
 
 * {{{../2.0.0}v2.0.0}}
 
-  * {{{http://sourceforge.net/apps/mantisbt/demoiselle/view.php?id=549}0000549}}: Compatibilidade com a versão 2 do demoiselle
+  * {{{http://sourceforge.net/apps/mantisbt/demoiselle/view.php?id=549}0000549}}: [Improvement] Compatibilidade com a versão 2 do demoiselle.
 
