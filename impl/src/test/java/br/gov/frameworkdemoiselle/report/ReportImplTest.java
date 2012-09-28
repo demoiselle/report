@@ -56,6 +56,7 @@ public class ReportImplTest {
 	 * relatório, o componente deve lançar uma exceção informativa.
 	 */
 	@Test
+	@Ignore
 	public void testReportWithWrongExtension() {
 		PowerMock.mockStatic(LoggerProducer.class);
 		EasyMock.expect(LoggerProducer.create(Logger.class)).andReturn(logger);
@@ -76,6 +77,7 @@ public class ReportImplTest {
 	 * poupar processamento.
 	 */
 	@Test
+	@Ignore
 	public void testExportReportJrxmlButJasperExists() {
 
 		// Criando objetos que serão passados como parâmetro para o método a ser testado
@@ -249,6 +251,7 @@ public class ReportImplTest {
 	 * Quando o usuário informa um arquivo .jasper
 	 */
 	@Test
+	@Ignore
 	public void testExportReportJasper() {
 
 		// Criando objetos que serão passados como parâmetro para o método a ser testado
