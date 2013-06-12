@@ -92,6 +92,6 @@
 	</repositories>
 
 	<properties>
-		<project.context>component/report/reference</project.context>
+		<project.context>components/report/reference</project.context>
 	</properties>
 </project>
