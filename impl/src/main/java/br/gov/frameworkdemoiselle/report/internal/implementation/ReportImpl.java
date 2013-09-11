@@ -51,11 +51,12 @@ import net.sf.jasperreports.engine.util.JRLoader;
 import org.slf4j.Logger;
 
 import br.gov.frameworkdemoiselle.DemoiselleException;
-import br.gov.frameworkdemoiselle.internal.configuration.ConfigurationLoader;
 import br.gov.frameworkdemoiselle.internal.producer.LoggerProducer;
-import br.gov.frameworkdemoiselle.internal.producer.ResourceBundleProducer;
 import br.gov.frameworkdemoiselle.report.Report;
 import br.gov.frameworkdemoiselle.report.Type;
+import br.gov.frameworkdemoiselle.util.Beans;
+import br.gov.frameworkdemoiselle.util.NameQualifier;
+import br.gov.frameworkdemoiselle.util.Reflections;
 import br.gov.frameworkdemoiselle.util.ResourceBundle;
 
 public class ReportImpl implements Report {
@@ -81,7 +82,7 @@ public class ReportImpl implements Report {
 	 */
 	public ReportImpl(String path) {
 		this.logger = LoggerProducer.create(Logger.class);
-		this.bundle = ResourceBundleProducer.create("demoiselle-report-bundle");
+		this.bundle = Beans.getReference(ResourceBundle.class, new NameQualifier("demoiselle-report-bundle")); 
 		this.path = path;
 	}
 
@@ -106,7 +107,7 @@ public class ReportImpl implements Report {
 		InputStream reportStream;
 
 		try {
-			ClassLoader classLoader = ConfigurationLoader.getClassLoaderForResource(relativePath);
+			ClassLoader classLoader = Reflections.getClassLoaderForResource(relativePath);
 			reportStream = classLoader.getResourceAsStream(relativePath);
 
 		} catch (Exception cause) {

@@ -40,13 +40,13 @@
 
 	<groupId>br.gov.frameworkdemoiselle.component</groupId>
 	<artifactId>demoiselle-report</artifactId>
-	<version>2.1.1-SNAPSHOT</version>
+	<version>2.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<parent>
 		<groupId>br.gov.frameworkdemoiselle</groupId>
 		<artifactId>demoiselle-parent</artifactId>
-		<version>8</version>
+		<version>9</version>
 		<relativePath>../../internal/parent/demoiselle</relativePath>
 	</parent>
 
@@ -99,14 +99,6 @@
 			<artifactId>jasperreports</artifactId>
 			<version>${jasperreports.version}</version>
 			<exclusions>
-				<exclusion>
-					<artifactId>commons-beanutils</artifactId>
-					<groupId>commons-beanutils</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>commons-collections</artifactId>
-					<groupId>commons-collections</groupId>
-				</exclusion>
 				<exclusion>
 					<artifactId>xml-apis</artifactId>
 					<groupId>xml-apis</groupId>
@@ -177,7 +169,7 @@
 	</repositories>
 
 	<properties>
-		<demoiselle.framework.version>2.3.0</demoiselle.framework.version>
+		<demoiselle.framework.version>2.4.0-BETA3</demoiselle.framework.version>
 		<jasperreports.version>4.0.1</jasperreports.version>
 	</properties>
 </project>
