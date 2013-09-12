@@ -61,6 +61,8 @@ import br.gov.frameworkdemoiselle.DemoiselleException;
 import br.gov.frameworkdemoiselle.internal.producer.LoggerProducer;
 import br.gov.frameworkdemoiselle.internal.producer.ResourceBundleProducer;
 import br.gov.frameworkdemoiselle.report.Type;
+import br.gov.frameworkdemoiselle.util.Beans;
+import br.gov.frameworkdemoiselle.util.NameQualifier;
 import br.gov.frameworkdemoiselle.util.ResourceBundle;
 
 public class JasperReportsExporter {
@@ -75,7 +77,7 @@ public class JasperReportsExporter {
 		if (logger == null) {
 			logger = LoggerProducer.create(Logger.class);
 		}
-		ResourceBundle bundle = ResourceBundleProducer.create("demoiselle-report-bundle");
+		ResourceBundle bundle = Beans.getReference(ResourceBundle.class, new NameQualifier("demoiselle-report-bundle"));
 
 		logger.debug(bundle.getString("generating-report", type.name()));
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

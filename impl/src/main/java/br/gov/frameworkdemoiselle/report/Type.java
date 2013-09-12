@@ -39,6 +39,8 @@ package br.gov.frameworkdemoiselle.report;
 
 import br.gov.frameworkdemoiselle.DemoiselleException;
 import br.gov.frameworkdemoiselle.internal.producer.ResourceBundleProducer;
+import br.gov.frameworkdemoiselle.util.Beans;
+import br.gov.frameworkdemoiselle.util.NameQualifier;
 import br.gov.frameworkdemoiselle.util.ResourceBundle;
 
 /**
@@ -56,7 +58,7 @@ public enum Type {
 	 */
 	public static Type valueTo(String alias) {
 		//ResourceBundleProducer bundleProducer = new ResourceBundleProducer();
-		ResourceBundle bundle = ResourceBundleProducer.create("demoiselle-report-bundle");
+		ResourceBundle bundle = Beans.getReference(ResourceBundle.class, new NameQualifier("demoiselle-report-bundle"));
 
 		if (alias == null || alias == "") {
 			throw new DemoiselleException(bundle.getString("report-type-null"));
