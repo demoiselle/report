@@ -38,7 +38,6 @@ package br.gov.frameworkdemoiselle.report;
 
 
 import br.gov.frameworkdemoiselle.DemoiselleException;
-import br.gov.frameworkdemoiselle.internal.producer.ResourceBundleProducer;
 import br.gov.frameworkdemoiselle.util.Beans;
 import br.gov.frameworkdemoiselle.util.NameQualifier;
 import br.gov.frameworkdemoiselle.util.ResourceBundle;
