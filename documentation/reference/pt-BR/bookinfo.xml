@@ -9,7 +9,6 @@
 	<abstract>Guide to Demoiselle Report component</abstract>
 	<titleabbrev>Demoiselle Report Guide</titleabbrev>
 
-	<xi:include href="revhistory.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="authorgroup.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 
 </bookinfo>
