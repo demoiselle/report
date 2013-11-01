@@ -169,7 +169,7 @@
 	</repositories>
 
 	<properties>
-		<demoiselle.framework.version>2.4.0-SNAPSHOT</demoiselle.framework.version>
+		<demoiselle.framework.version>2.4.0</demoiselle.framework.version>
 		<jasperreports.version>4.0.1</jasperreports.version>
 	</properties>
 </project>
