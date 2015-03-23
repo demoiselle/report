@@ -39,6 +39,7 @@ package br.gov.frameworkdemoiselle.report.internal.implementation;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -47,9 +48,6 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
-
-import org.slf4j.Logger;
-
 import br.gov.frameworkdemoiselle.DemoiselleException;
 import br.gov.frameworkdemoiselle.internal.producer.LoggerProducer;
 import br.gov.frameworkdemoiselle.report.Report;
@@ -81,7 +79,7 @@ public class ReportImpl implements Report {
 	 * @throws JRException
 	 */
 	public ReportImpl(String path) {
-		this.logger = LoggerProducer.create(Logger.class);
+		this.logger = LoggerProducer.create("br.gov.frameworkdemoiselle.report.internal.implementation");
 		this.bundle = Beans.getReference(ResourceBundle.class, new NameQualifier("demoiselle-report-bundle")); 
 		this.path = path;
 	}
@@ -150,16 +148,16 @@ public class ReportImpl implements Report {
 				loadJasper(path);
 
 			} else if (path.endsWith(JasperReportsExporter.NON_COMPILED_REPORT_EXTENSION)) {
-				logger.warn(bundle.getString("recommend-use-jasper"));
+				logger.warning(bundle.getString("recommend-use-jasper"));
 				try {
 					String jasperPath = path.replaceAll(JasperReportsExporter.NON_COMPILED_REPORT_EXTENSION,
 							JasperReportsExporter.COMPILED_REPORT_EXTENSION);
 					
 					loadJasper(jasperPath);
-					logger.debug(bundle.getString("found-compiled-version", jasperPath));
+					logger.fine(bundle.getString("found-compiled-version", jasperPath));
 
 				} catch (Exception e) {
-					logger.debug(bundle.getString("not-found-compiled-version"));
+					logger.fine(bundle.getString("not-found-compiled-version"));
 					loadJRXML(path);
 				}
 
@@ -171,7 +169,7 @@ public class ReportImpl implements Report {
 
 	@Override
 	public void prepare(Collection<?> dataSource, Map<String, Object> param) {
-		logger.debug(bundle.getString("filling-report"));
+		logger.fine(bundle.getString("filling-report"));
 		loadReport();
 
 		try {

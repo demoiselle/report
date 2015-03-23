@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import junit.framework.Assert;
 import net.sf.jasperreports.engine.JRException;
@@ -25,7 +26,6 @@ import org.powermock.api.easymock.PowerMock;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.reflect.Whitebox;
-import org.slf4j.Logger;
 
 import br.gov.frameworkdemoiselle.internal.producer.LoggerProducer;
 import br.gov.frameworkdemoiselle.report.internal.implementation.JasperReportsExporter;
@@ -59,7 +59,7 @@ public class ReportImplTest {
 	@Ignore
 	public void testReportWithWrongExtension() {
 		PowerMock.mockStatic(LoggerProducer.class);
-		EasyMock.expect(LoggerProducer.create(Logger.class)).andReturn(logger);
+		EasyMock.expect(LoggerProducer.create("br.gov.frameworkdemoiselle.report")).andReturn(logger);
 		PowerMock.replayAll();
 
 		report = new ReportImpl("readme.txt");
@@ -91,9 +91,9 @@ public class ReportImplTest {
 		JasperPrint print = EasyMock.createMock(JasperPrint.class);
 
 		// Esperar as chamadas de debug e warn ao log.
-		logger.debug(EasyMock.anyObject(String.class));
+		logger.fine(EasyMock.anyObject(String.class));
 		EasyMock.expectLastCall().anyTimes();
-		logger.warn(EasyMock.anyObject(String.class));
+		logger.warning(EasyMock.anyObject(String.class));
 		EasyMock.expectLastCall().anyTimes();
 
 		// O Beans é chamado para obter a referência ao Logger.
@@ -179,9 +179,9 @@ public class ReportImplTest {
 		JasperPrint print = EasyMock.createMock(JasperPrint.class);
 
 		// Esperar as chamadas de debug e warn ao log.
-		logger.debug(EasyMock.anyObject(String.class));
+		logger.fine(EasyMock.anyObject(String.class));
 		EasyMock.expectLastCall().anyTimes();
-		logger.warn(EasyMock.anyObject(String.class));
+		logger.warning(EasyMock.anyObject(String.class));
 		EasyMock.expectLastCall().anyTimes();
 
 		// O Beans é chamado para obter a referência ao Logger.
@@ -265,9 +265,9 @@ public class ReportImplTest {
 		JasperPrint print = EasyMock.createMock(JasperPrint.class);
 
 		// Esperar as chamadas de debug e warn ao log.
-		logger.debug(EasyMock.anyObject(String.class));
+		logger.fine(EasyMock.anyObject(String.class));
 		EasyMock.expectLastCall().anyTimes();
-		logger.warn(EasyMock.anyObject(String.class));
+		logger.warning(EasyMock.anyObject(String.class));
 		EasyMock.expectLastCall().anyTimes();
 
 		// O Beans é chamado para obter a referência ao Logger.

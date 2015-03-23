@@ -37,6 +37,7 @@
 package br.gov.frameworkdemoiselle.report.internal.implementation;
 
 import java.io.ByteArrayOutputStream;
+import java.util.logging.Logger;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
@@ -54,9 +55,6 @@ import net.sf.jasperreports.engine.export.JRXlsExporter;
 import net.sf.jasperreports.engine.export.JRXlsExporterParameter;
 import net.sf.jasperreports.engine.export.oasis.JROdsExporter;
 import net.sf.jasperreports.engine.export.oasis.JROdtExporter;
-
-import org.slf4j.Logger;
-
 import br.gov.frameworkdemoiselle.DemoiselleException;
 import br.gov.frameworkdemoiselle.internal.producer.LoggerProducer;
 import br.gov.frameworkdemoiselle.report.Type;
@@ -74,37 +72,37 @@ public class JasperReportsExporter {
 
 	public static synchronized ByteArrayOutputStream export(Type type, JasperPrint print) {
 		if (logger == null) {
-			logger = LoggerProducer.create(Logger.class);
+			logger = LoggerProducer.create("br.gov.frameworkdemoiselle.report.internal.implementation");
 		}
 		ResourceBundle bundle = Beans.getReference(ResourceBundle.class, new NameQualifier("demoiselle-report-bundle"));
 
-		logger.debug(bundle.getString("generating-report", type.name()));
+		logger.fine(bundle.getString("generating-report", type.name()));
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		try {
 			switch (type) {
 				case CSV:
-					logger.debug(bundle.getString("exporting-report", "csv"));
+					logger.fine(bundle.getString("exporting-report", "csv"));
 					JRCsvExporter exporterCSV = new JRCsvExporter();
 					exporterCSV.setParameter(JRCsvExporterParameter.JASPER_PRINT, print);
 					exporterCSV.setParameter(JRCsvExporterParameter.OUTPUT_STREAM, outputStream);
 					exporterCSV.exportReport();
 					break;
 				case HTML:
-					logger.debug(bundle.getString("exporting-report", "html"));
+					logger.fine(bundle.getString("exporting-report", "html"));
 					JRHtmlExporter exporterHTML = new JRHtmlExporter();
 					exporterHTML.setParameter(JRHtmlExporterParameter.JASPER_PRINT, print);
 					exporterHTML.setParameter(JRHtmlExporterParameter.OUTPUT_STREAM, outputStream);
 					exporterHTML.exportReport();
 					break;
 				case ODT:
-					logger.debug(bundle.getString("exporting-report", "odt"));
+					logger.fine(bundle.getString("exporting-report", "odt"));
 					JROdtExporter exporterODT = new JROdtExporter();
 					exporterODT.setParameter(JRExporterParameter.JASPER_PRINT, print);
 					exporterODT.setParameter(JRExporterParameter.OUTPUT_STREAM, outputStream);
 					exporterODT.exportReport();
 					break;
 				case PDF:
-					logger.debug(bundle.getString("exporting-report", "pdf"));
+					logger.fine(bundle.getString("exporting-report", "pdf"));
 					JRPdfExporter exporterPDF = new JRPdfExporter();
 					exporterPDF.setParameter(JRPdfExporterParameter.JASPER_PRINT, print);
 					exporterPDF.setParameter(JRPdfExporterParameter.OUTPUT_STREAM, outputStream);
@@ -113,7 +111,7 @@ public class JasperReportsExporter {
 					exporterPDF.exportReport();
 					break;
 				case TXT:
-					logger.debug(bundle.getString("exporting-report", "txt"));
+					logger.fine(bundle.getString("exporting-report", "txt"));
 					JRTextExporter exporterTXT = new JRTextExporter();
 					exporterTXT.setParameter(JRTextExporterParameter.JASPER_PRINT, print);
 					exporterTXT.setParameter(JRTextExporterParameter.OUTPUT_STREAM, outputStream);
@@ -122,13 +120,13 @@ public class JasperReportsExporter {
 					exporterTXT.exportReport();
 					break;
 				case RTF:
-					logger.debug(bundle.getString("exporting-report", "rtf"));
+					logger.fine(bundle.getString("exporting-report", "rtf"));
 					JRRtfExporter exporterRTF = new JRRtfExporter();
 					exporterRTF.setParameter(JRExporterParameter.JASPER_PRINT, print);
 					exporterRTF.setParameter(JRExporterParameter.OUTPUT_STREAM, outputStream);
 					exporterRTF.exportReport();
 				case XLS:
-					logger.debug(bundle.getString("exporting-report", "xls"));
+					logger.fine(bundle.getString("exporting-report", "xls"));
 					JRXlsExporter exporterXLS = new JRXlsExporter();
 					exporterXLS.setParameter(JRExporterParameter.JASPER_PRINT, print);
 					exporterXLS.setParameter(JRExporterParameter.OUTPUT_STREAM, outputStream);
@@ -138,7 +136,7 @@ public class JasperReportsExporter {
 					exporterXLS.exportReport();
 					break;
 				case ODS:
-					logger.debug(bundle.getString("exporting-report", "ods"));
+					logger.fine(bundle.getString("exporting-report", "ods"));
 					  JROdsExporter exporterODS = new JROdsExporter();
 					  exporterODS.setParameter(JRExporterParameter.JASPER_PRINT, print);
 					  exporterODS.setParameter(JRExporterParameter.OUTPUT_STREAM, outputStream);
